@@ -9,7 +9,6 @@
 void execute_command(char *cmd)
 {
 pid_t pid = fork();
-
 if (pid == -1)
 {
 perror("fork failed");
@@ -18,14 +17,25 @@ exit(1);
 
 if (pid == 0)
 {
-if (execlp(cmd, cmd, (char *)NULL) == -1)
+char **argv = malloc(2 * sizeof(char *));
+if (argv == NULL)
 {
-perror("Command execution failed");
+perror("malloc failed");
 exit(1);
 }
+argv[0] = cmd;
+argv[1] = NULL;
+
+if (execve(cmd, argv, NULL) == -1)
+{
+perror("Command execution failed");
+free(argv);
+exit(1);
+}
+free(argv);
 }
 else
 {
 wait(NULL);
-}
-}
+}}
+
