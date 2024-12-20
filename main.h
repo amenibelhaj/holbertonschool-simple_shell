@@ -1,16 +1,16 @@
 #ifndef MAIN_H
 #define MAIN_H
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
-#include <string.h>
+#include <sys/types.h>
 #include <sys/wait.h>
-#include <string.h>
-#include <errno.h>
 
-ssize_t get_line(char **line, size_t *len);
-char **parse_line(char *line);
 
-void execute_line(char **args);
+char *get_line(void);
+void parse_input(char *input);
+void execute_command(char *cmd);
 
 #endif

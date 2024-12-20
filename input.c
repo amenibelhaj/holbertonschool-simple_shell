@@ -1,14 +1,15 @@
 #include "main.h"
 
-ssize_t get_line(char **lineptr, size_t *n) {
-    ssize_t nread = getline(lineptr, n, stdin);
-    if (nread == -1) {
-        // Check if it's EOF (Ctrl+D)
-        if (feof(stdin)) {
-            return -1;
-        }
-        perror("getline"); // Handle errors in getline
-        return -1;
-    }
-    return nread;
+char *get_line(void)
+{
+char *line = NULL;
+size_t len = 0;
+if (getline(&line, &len, stdin) == -1)
+{
+free(line);
+exit(0);
+}
+
+line[strcspn(line, "\n")] = 0;
+return (line);
 }

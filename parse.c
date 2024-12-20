@@ -1,33 +1,9 @@
 #include "main.h"
-char **parse_line(char *line)
-{
-int buffer_size = 64;
-int position = 0;
-char **args = malloc(buffer_size * sizeof(char *));
-char *token;
-if (!args)
-{
-perror("malloc");
-exit(EXIT_FAILURE);
-    }
-token = strtok(line, " \n");
-while (token != NULL)
-{
-args[position] = token;
-position++;
 
-if (position >= buffer_size)
+void parse_input(char *input)
 {
-buffer_size += 64;
-args = realloc(args, buffer_size * sizeof(char *));
-if (!args)
+if (strlen(input) > 0)
 {
-perror("realloc");
-exit(EXIT_FAILURE);
-}}
-token = strtok(NULL, " \n");
+execute_command(input);
 }
-args[position] = NULL;
-
-return (args);
 }
