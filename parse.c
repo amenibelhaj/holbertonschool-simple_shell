@@ -1,21 +1,15 @@
-#include "main.h"
+#include "shell.h"
 
-/**
- * parse_input - Processes the input string.
- * @input: A pointer to the string input.
- */
-void parse_input(char *input)
-{
-    char *args[100];
-    char *token = strtok(input, " ");
+
+void parse_input(char *input, char **args) {
     int i = 0;
+    char *token;
 
-    while (token != NULL)
-    {
+    
+    token = strtok(input, " ");
+    while (token != NULL) {
         args[i++] = token;
         token = strtok(NULL, " ");
     }
-    args[i] = NULL;  
-
-    execute_command(args);  
+    args[i] = NULL; 
 }
