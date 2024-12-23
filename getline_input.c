@@ -1,8 +1,7 @@
 #include "shell.h"
-**
+/**
  * read_input - Reads a line of input from the user.
- *
- * @Return: A string containing the input entered by the user.
+ * @return: A string containing the input entered by the user.
  *NULL is returned if the end of file (EOF) is encountered.
  */
  char *read_input(void)
