@@ -1,10 +1,10 @@
 #include "shell.h"
 /**
  * read_input - Reads a line of input from the user.
- * @return: A string containing the input entered by the user.
- *NULL is returned if the end of file (EOF) is encountered.
+ *
+ * @return: null
  */
- char *read_input(void)
+char *read_input(void)
 {
 char *input = NULL;
 size_t len = 0;
@@ -23,4 +23,3 @@ exit(1);
 
 return (input);
 }
-
