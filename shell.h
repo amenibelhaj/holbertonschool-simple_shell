@@ -10,8 +10,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-char *get_input(void);
-void parse_input(char *input, char **args);
-void execute(char **args);
+
+
+char *read_input(void);
+char **parse_input(char *input);
+void execute_command(char **args);
+void handle_exit(void);
+void handle_error(char *command);
+char *find_in_path(char *command);
 
 #endif
+
