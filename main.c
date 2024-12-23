@@ -1,16 +1,6 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/wait.h>
 
-/**
- * main - Entry point of the program.
- * Description: Displays a prompt, waits for input, and executes commands.
- * Return: Always returns 0 to indicate successful execution.
- */
-int main()
+int main(void)
 {
     char *input;
 
@@ -20,22 +10,19 @@ int main()
         fflush(stdout);
 
         input = get_line();
-
         if (input == NULL)
         {
-            printf("\n"); 
-            break;  
+            break; /* Handle EOF (Ctrl+D) */
         }
 
         if (strcmp(input, "exit") == 0)
         {
             free(input);
-            exit(0); 
+            exit(0);  /* Exit the shell */
         }
 
-        parse_input(input);
-        free(input);
+        parse_input(input); /* Process the input */
+        free(input);        /* Free allocated memory */
     }
-
-    return 0;  
+    return (0);
 }

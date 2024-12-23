@@ -1,34 +1,32 @@
 #include "main.h"
-#include <sys/wait.h>  
-#include <unistd.h>    
-#include <stdlib.h>    
 
-/**
- * execute_command - Executes a single-word command.
- * @cmd: The command to execute.
- * Description: This function attempts to execute the provided
- * command in a new child process.
- */
 void execute_command(char *cmd)
 {
-    pid_t pid = fork(); 
+    pid_t pid = fork();
 
-    if (pid == -1) 
+    if (pid == -1)
     {
         perror("fork failed");
         exit(1);
     }
 
-    if (pid == 0) 
+    if (pid == 0)
     {
-        if (execve(cmd, &cmd, NULL) == -1)
+        /* Child process */
+        char *argv[2];  /* Declare the argument array */
+
+        argv[0] = cmd;  /* Assign the command */
+        argv[1] = NULL; /* Null-terminate the array */
+
+        if (execve(cmd, argv, NULL) == -1)
         {
-            perror(cmd); 
-            exit(1);  
+            perror(cmd);
+            exit(1);
         }
     }
-    else  
+    else
     {
-        wait(NULL);  
+        /* Parent process */
+        wait(NULL);  /* Wait for the child process to terminate */
     }
 }
