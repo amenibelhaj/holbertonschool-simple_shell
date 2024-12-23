@@ -7,26 +7,26 @@
  */
 void handle_cd(char **args)
 {
-    if (args[1] == NULL)  // No argument provided, go to home directory
-    {
-        char *home = getenv("HOME");
-        if (home == NULL)
-        {
-            perror("cd: HOME not set");
-            return;
-        }
-        if (chdir(home) != 0)
-        {
-            perror("cd");
-        }
-    }
-    else  // Change to the directory provided
-    {
-        if (chdir(args[1]) != 0)
-        {
-            perror("cd");
-        }
-    }
+if (args[1] == NULL)
+{
+char *home = getenv("HOME");
+if (home == NULL)
+{
+perror("cd: HOME not set");
+return;
+}
+if (chdir(home) != 0)
+{
+perror("cd");
+}
+}
+else 
+{
+if (chdir(args[1]) != 0)
+{
+perror("cd");
+}
+}
 }
 
 /**
@@ -35,11 +35,11 @@ void handle_cd(char **args)
  */
 void handle_env(char **env)
 {
-    int i = 0;
+int i = 0;
 
-    while (env[i] != NULL)
-    {
-        printf("%s\n", env[i]);
-        i++;
-    }
+while (env[i] != NULL)
+{
+printf("%s\n", env[i]);
+i++;
+}
 }
