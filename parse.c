@@ -1,15 +1,19 @@
 #include "main.h"
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+
 /**
- * parse_input - Processes a string input.
- * @input: A pointer to the string to be parsed.
- * Description: This function processes the given input string,
- * typically by parsing or manipulating its contents.
+ * execute_command - Executes a single-word command.
+ * @cmd: The command to execute.
+ * Description: This function uses execve() to execute the provided command.
  */
 
 void parse_input(char *input)
 {
-if (strlen(input) > 0)
-{
-execute_command(input);
-}
+    if (input == NULL || strlen(input) == 0)
+        return;
+
+    execute_command(input);
 }
