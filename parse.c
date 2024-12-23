@@ -1,27 +1,21 @@
 #include "main.h"
 
 /**
- * parse_input - Processes a string input.
- * @input: A pointer to the string to be parsed.
- * Description: This function processes the given input string,
- * typically by parsing or manipulating its contents.
+ * parse_input - Processes the input string.
+ * @input: A pointer to the string input.
  */
 void parse_input(char *input)
 {
-    size_t i; 
-    
-    /* Manually remove the newline character from the input string */
-    for (i = 0; input[i] != '\0'; i++)  
-    {
-        if (input[i] == '\n')
-        {
-            input[i] = '\0';  /* Replace newline with null terminator */
-            break;
-        }
-    }
+    char *args[100];
+    char *token = strtok(input, " ");
+    int i = 0;
 
-    if (strlen(input) > 0)
+    while (token != NULL)
     {
-        execute_command(input);
+        args[i++] = token;
+        token = strtok(NULL, " ");
     }
+    args[i] = NULL;  
+
+    execute_command(args);  
 }

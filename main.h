@@ -7,8 +7,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-char *get_line(void);
 void parse_input(char *input);
-void execute_command(char *cmd);
+void execute_command(char *args[]);  
 
 #endif 

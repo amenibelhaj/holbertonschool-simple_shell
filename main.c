@@ -1,28 +1,33 @@
 #include "main.h"
 
+/**
+ * main - Entry point for the simple shell.
+ * 
+ * Return: Always 0 (success)
+ */
 int main(void)
 {
-    char *input;
+    char *input = NULL;
+    size_t len = 0;
+    ssize_t read;
 
     while (1)
     {
-        printf("$ ");
-        fflush(stdout);
-
-        input = get_line();
-        if (input == NULL)
-        {
-            break; /* Handle EOF (Ctrl+D) */
-        }
-
-        if (strcmp(input, "exit") == 0)
+        printf("$ ");  
+        read = getline(&input, &len, stdin);  
+        if (read == -1)  
         {
             free(input);
-            exit(0);  /* Exit the shell */
+            exit(0);
         }
+        input[strcspn(input, "\n")] = '\0';  
 
-        parse_input(input); /* Process the input */
-        free(input);        /* Free allocated memory */
+        if (strlen(input) > 0) 
+        {
+            parse_input(input); 
+        }
     }
-    return (0);
+
+    free(input);
+    return 0;
 }

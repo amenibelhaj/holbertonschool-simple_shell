@@ -1,14 +1,21 @@
 #include "main.h"
 
-char *get_line(void)
+/**
+ * get_input - Function to read input from the user.
+ * @input: Pointer to the input string buffer.
+ * 
+ * Return: The number of characters read.
+ */
+ssize_t get_input(char **input)
 {
-    char *line = NULL;
     size_t len = 0;
+    ssize_t read;
 
-    if (getline(&line, &len, stdin) == -1)
+    read = getline(input, &len, stdin);
+    if (read == -1)
     {
-        free(line);
-        return (NULL); /* End of file or error */
+        return -1;
     }
-    return (line);
+    (*input)[strcspn(*input, "\n")] = '\0'; 
+    return read;
 }
