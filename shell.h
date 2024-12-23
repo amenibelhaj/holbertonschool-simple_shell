@@ -8,16 +8,11 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include <fcntl.h>
-
-
 
 char *read_input(void);
 char **parse_input(char *input);
-void execute_command(char **args);
-void handle_exit(void);
-void handle_error(char *command);
-char *find_in_path(char *command);
+void fork_and_execute(char **args, char **env);
+void handle_cd(char **args);
+void handle_env(char **env);
 
-#endif
-
+#endif 

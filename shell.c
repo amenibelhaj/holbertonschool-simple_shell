@@ -1,46 +1,58 @@
 #include "shell.h"
 
 /**
- * main - The main entry point of the shell program.
- * @return: Always returns 0 (success).
+ * main - Entry point for the shell program
+ * @argc: Argument count (not used)
+ * @argv: Argument vector (array of command line arguments, not used)
+ * @env: Environment variables for the shell
+ *
+ * Return: 0 on success, exits on EOF (Ctrl+D)
  */
-
-int main(void)
+int main(int argc, char **argv, char **env)
 {
-char *input;
-    char **args;
+    char *line = NULL, **args;
+    (void)argc;
+    (void)argv;
 
     while (1)
     {
-        printf("$ ");
-        fflush(stdout); 
-        input = read_input();
-        if (input == NULL) 
-        {
-            break;
-        }
+        if (isatty(STDIN_FILENO)) 
+            printf("($) ");
         
-        args = parse_input(input);
-        if (args[0] == NULL)  
+        line = read_input(); 
+        if (line == NULL)     
+            break;
+        
+        args = parse_input(line);  
+        
+        if (args && args[0]) 
         {
-            free(input);
-            continue;
+            if (strcmp(args[0], "exit") == 0)
+            {
+                free(args);
+                free(line);
+                exit(EXIT_SUCCESS);
+            }
+            if (strcmp(args[0], "cd") == 0)
+            {
+                handle_cd(args);
+                free(args);
+                free(line);
+                continue;
+            }
+            if (strcmp(args[0], "env") == 0)
+            {
+                handle_env(env);
+            }
+            else
+            {
+                fork_and_execute(args, env);  
+            }
         }
 
-        if (strcmp(args[0], "exit") == 0)  
-        {
-            free(input);
-            free(args);
-exit(0);
-}
-else
-{
-execute_command(args); 
-        }
-
-        free(input);
         free(args);
+        free(line);
     }
 
-return (0);
+    return (0);
 }

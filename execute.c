@@ -1,70 +1,29 @@
 #include "shell.h"
+
 /**
- * execute_command - Executes a command by searching in
- * directories listed in PATH or using an absolute/relative path
- * @args: An array of command arguments (args[0] is the command)
- * Return: None
+ * fork_and_execute - Forks a new process and executes a command.
+ * @args: The parsed arguments (command).
+ * @env: The environment variables.
  */
-
-
-void execute_command(char **args)
+void fork_and_execute(char **args, char **env)
 {
     pid_t pid = fork();
 
-    if (pid == 0)  // Child process
+    if (pid == -1)
     {
-        char *path = find_in_path(args[0]);
-
-        if (path == NULL)
-        {
-            handle_error(args[0]);
-            exit(1);
-        }
-
-        if (execve(path, args, NULL) == -1) 
-        {
-            handle_error(args[0]);
-            exit(1);
-        }
+        perror("fork failed");
+        exit(1);
     }
-    else if (pid > 0) 
+    else if (pid == 0)
     {
-        wait(NULL);  
+        if (execve(args[0], args, env) == -1)
+        {
+            perror(args[0]);  
+            exit(1);
+        }
     }
     else
     {
-        perror("fork failed");
+        wait(NULL);  
     }
 }
-
-void handle_error(char *command)
-{
-    fprintf(stderr, "./shell: No such file or directory: %s\n", command);
-}
-
-char *find_in_path(char *command)
-{
-    char *path_env = getenv("PATH");
-    char *token = strtok(path_env, ":");
-    char *command_path = malloc(1024);
-
-    if (command_path == NULL)
-    {
-        perror("malloc failed");
-        exit(1);
-    }
-
-    while (token != NULL)
-    {
-        sprintf(command_path, "%s/%s", token, command);
-        if (access(command_path, X_OK) == 0)  
-        {
-            return command_path;
-        }
-        token = strtok(NULL, ":");
-    }
-
-    free(command_path);
-    return NULL;
-}
-
