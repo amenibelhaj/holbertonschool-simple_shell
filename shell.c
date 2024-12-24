@@ -8,51 +8,36 @@
  *
  * Return: 0 on success, exits on EOF (Ctrl+D)
  */
- int main(int argc, char **argv, char **env)
+ #include "shell.h"
+
+int main(int argc, char **argv, char **env)
 {
-    char *line = NULL, **args;
-    (void)argc;
-    (void)argv;
+char *line = NULL, **args;
+size_t len = 0;
+ssize_t nread;
 
-    while (1)
-    {
-        if (isatty(STDIN_FILENO)) 
-            printf("($) ");
-        
-        line = read_input(); 
-        if (line == NULL)     
-            break;
-        
-        args = parse_input(line);  
-        
-        if (args && args[0]) 
-        {
-            if (strcmp(args[0], "exit") == 0)
-            {
-                free(args);
-                free(line);
-                exit(EXIT_SUCCESS);
-            }
-            if (strcmp(args[0], "cd") == 0)
-            {
-                handle_cd(args);
-                free(args);
-                free(line);
-                continue;
-            }
-            if (strcmp(args[0], "env") == 0)
-            {
-                handle_env(env);
-            }
-            else
-            {
-                fork_and_execute(args, env);  
-            }
-        }
+(void)argc;
+(void)argv;
 
-        free(args);
-        free(line);
-    }
+while (1)
+{
+if (isatty(STDIN_FILENO))
+printf("%s", PROMPT);
 
-    return (0);
-} 
+nread = getline(&line, &len, stdin);
+if (nread == -1)
+{
+free(line);
+exit(0);
+}
+if (line[nread - 1] == '\n')
+line[nread - 1] = '\0';
+args = parse_input(line);
+
+if (args && args[0])
+{
+execute_command(args, env); }
+free(args); }
+free(line);
+return (0); }
+

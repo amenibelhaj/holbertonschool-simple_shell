@@ -1,34 +1,30 @@
 #include "shell.h"
-
 /**
- * parse_input - Tokenizes the input string into individual arguments.
+ * parse_input - Parses the input string into an array of arguments.
+ * @input: The input string to be parsed.
  *
- * @input: The raw input string entered by the user.
- *
- * Return: A pointer to an array of strings containing the arguments.
- *         The array is null-terminated.
+ * Return: An array of strings (arguments) parsed from the input.
  */
-
 char **parse_input(char *input)
 {
-char **args;
-char *token;
-int index = 0;
+    char **args = malloc(sizeof(char *) * MAX_ARGS);
+    char *token;
+    int i = 0;
 
-args = malloc(sizeof(char *) * MAX_ARGS);
-if (!args)
-{
-perror("malloc failed");
-exit(1);
-}
+    if (args == NULL)
+    {
+        perror("malloc failed");
+        exit(1);
+    }
 
-token = strtok(input, " ");
-while (token != NULL)
-{
-args[index] = token;
-index++;
-token = strtok(NULL, " ");
-}
-args[index] = NULL;
-return (args);
+    token = strtok(input, " ");
+    while (token != NULL && i < MAX_ARGS - 1)
+    {
+        args[i] = token;
+        i++;
+        token = strtok(NULL, " ");
+    }
+    args[i] = NULL;
+
+    return args;
 }

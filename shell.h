@@ -8,12 +8,14 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+
 #define PROMPT "($) "
-#define MAX_ARGS 100
+#define MAX_ARGS 2
+
 char *read_input(void);
 char **parse_input(char *input);
-void fork_and_execute(char **args, char **env);
-void handle_cd(char **args);
-void handle_env(char **env);
-
+void execute_command(char **args, char **env);
+void handle_error(const char *cmd, const char *prog_name);
+void search_in_path(char **args, char **env, char *path);
+int main(int argc, char **argv, char **env);
 #endif

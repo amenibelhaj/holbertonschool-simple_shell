@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * _exit_shell - Exits the shell program.
  *
