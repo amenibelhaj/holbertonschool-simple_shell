@@ -3,17 +3,16 @@
 /**
  * main - Entry point for the shell program
  * @argc: Argument count (not used)
- * @argv: Argument vector (array of command line arguments, not used)
+ * @argv: Argument vector (array of command line arguments)
  * @env: Environment variables for the shell
  *
  * Return: 0 on success, exits on EOF (Ctrl+D)
  */
-#include "shell.h"
-
-int main(int argc, char **argv, char **env)
+ int main(int argc, char **argv, char **env)
 {
     char *line = NULL, **args;
     (void)argc;
+    (void)argv;
 
     while (1)
     {
@@ -47,7 +46,7 @@ int main(int argc, char **argv, char **env)
             }
             else
             {
-                fork_and_execute(args, env, argv[0]);  
+                fork_and_execute(args, env);  
             }
         }
 
@@ -56,4 +55,4 @@ int main(int argc, char **argv, char **env)
     }
 
     return (0);
-}
+} 
