@@ -7,24 +7,23 @@
  */
 char **parse_input(char *input)
 {
-    char **args = malloc(sizeof(char *) * MAX_ARGS);
-    char *token;
-    int i = 0;
+char **args = malloc(sizeof(char *) * MAX_ARGS);
+char *token;
+int i = 0;
 
-    if (args == NULL)
-    {
-        perror("malloc failed");
-        exit(1);
-    }
+if (args == NULL)
+{
+perror("malloc failed");
+exit(1);
+}
+token = strtok(input, " ");
+while (token != NULL && i < MAX_ARGS - 1)
+{
+args[i] = token;
+i++;
+token = strtok(NULL, " ");
+}
+args[i] = NULL;
 
-    token = strtok(input, " ");
-    while (token != NULL && i < MAX_ARGS - 1)
-    {
-        args[i] = token;
-        i++;
-        token = strtok(NULL, " ");
-    }
-    args[i] = NULL;
-
-    return args;
+return (args);
 }

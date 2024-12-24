@@ -5,8 +5,6 @@
  *
  * Return: A string containing the input entered by the user
  */
-
-
 char *read_input(void)
 {
 char *input = NULL;

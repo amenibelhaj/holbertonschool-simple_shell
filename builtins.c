@@ -11,13 +11,10 @@ char *home = getenv("HOME");
 if (home == NULL)
 {
 perror("cd: HOME not set");
-return;
-}
+return; }
 if (chdir(home) != 0)
 {
-perror("cd");
-}
-}
+perror("cd"); }}
 else
 {
 if (chdir(args[1]) != 0)
