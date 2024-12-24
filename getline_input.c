@@ -21,6 +21,5 @@ perror("getline failed");
 free(input);
 exit(1);
 }
-
 return (input);
 }

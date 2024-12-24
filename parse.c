@@ -8,25 +8,27 @@
  * Return: A pointer to an array of strings containing the arguments.
  *         The array is null-terminated.
  */
+
 char **parse_input(char *input)
 {
-char **args = malloc(64 * sizeof(char *));
-char *token = strtok(input, " \n");
-int i = 0;
+char **args;
+char *token;
+int index = 0;
 
-if (args == NULL)
+args = malloc(sizeof(char *) * MAX_ARGS);
+if (!args)
 {
 perror("malloc failed");
 exit(1);
 }
 
+token = strtok(input, " ");
 while (token != NULL)
 {
-args[i] = token;
-i++;
-token = strtok(NULL, " \n");
+args[index] = token;
+index++;
+token = strtok(NULL, " ");
 }
-
-args[i] = NULL;
+args[index] = NULL;
 return (args);
 }

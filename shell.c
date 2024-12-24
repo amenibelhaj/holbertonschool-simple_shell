@@ -8,11 +8,12 @@
  *
  * Return: 0 on success, exits on EOF (Ctrl+D)
  */
+#include "shell.h"
+
 int main(int argc, char **argv, char **env)
 {
     char *line = NULL, **args;
     (void)argc;
-    (void)argv;
 
     while (1)
     {
@@ -46,7 +47,7 @@ int main(int argc, char **argv, char **env)
             }
             else
             {
-                fork_and_execute(args, env);  
+                fork_and_execute(args, env, argv[0]);  
             }
         }
 
