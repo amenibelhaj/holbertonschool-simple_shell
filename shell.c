@@ -31,8 +31,9 @@ if (args && args[0])
 {
 if (strcmp(args[0], "exit") == 0)
 {
+free(args);
+free(line);
 exit_shell();
-exit(0);
 }
 execute_command(args, env);
 }
