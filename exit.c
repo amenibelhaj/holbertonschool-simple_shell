@@ -1,11 +1,10 @@
 #include "shell.h"
 /**
- * _exit_shell - Exits the shell program.
- *
- * Return: No return (terminates the shell program).
+ * exit_shell - Exits the shell program
+ * @args: An array of arguments passed to the shell (unused in this function)
  */
-void _exit_shell(void)
+void exit_shell(char **args)
 {
-printf("\n");
+free(args);
 exit(0);
 }
