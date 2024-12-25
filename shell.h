@@ -18,6 +18,6 @@ void execute_command(char **args, char **env);
 void handle_error(const char *cmd, const char *prog_name);
 void search_in_path(char **args, char **env, char *path);
 int main(int argc, char **argv, char **env);
-void exit_shell(char **args);
+void exit_shell(void);
 
 #endif
