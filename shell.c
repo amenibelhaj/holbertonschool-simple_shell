@@ -8,8 +8,6 @@
  *
  * Return: 0 on success, exits on EOF (Ctrl+D)
  */
- #include "shell.h"
-
 int main(int argc, char **argv, char **env)
 {
 char *line = NULL, **args;

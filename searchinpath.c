@@ -1,9 +1,12 @@
 #include "shell.h"
+
 /**
- * search_in_path - Searches the directories in PATH for the command.
- * @args: An array of arguments (command and its parameters).
- * @env: An array of environment variables.
- * @path: The PATH environment variable.
+ * search_in_path - Searches for a command in the directories listed in PATH.
+ * @args: An array of arguments passed to the command
+ *(where args[0] is the command).
+ * @env: The environment variables for the current process.
+ * @path: The PATH environment variable,
+ * containing a list of directories to search in.
  */
 void search_in_path(char **args, char **env, char *path)
 {
@@ -34,12 +37,16 @@ else if (pid == 0)
 if (execve(cmd_path, args, env) == -1)
 {
 perror("execve failed");
-exit(1); }}
+exit(1);
+}}
 else
 {
 wait(NULL);
 free(cmd_path);
-return; }}
-dir = strtok(NULL, ":"); }
+return;
+}}
+dir = strtok(NULL, ":");
+}
 handle_error(args[0], args[0]);
-free(cmd_path); }
+free(cmd_path);
+}

@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 
 #define PROMPT "($) "
-#define MAX_ARGS 2
+#define MAX_ARGS 100
 
 char *read_input(void);
 char **parse_input(char *input);
