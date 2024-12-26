@@ -21,28 +21,16 @@ if (chdir(args[1]) != 0)
 {
 perror("cd");
 }}}
+
 /**
- * _getenv - Retrieves the value of an environment variable.
- * @name: The name of the environment variable to find.
- * Return: Pointer to the value of the environment variable,
- * or NULL if not found.
+ * handle_env - Handles the `env` built-in command
+ * @env: The environment variables
+ *
+ * Return: None
  */
-char *_getenv(const char *name)
+void handle_env(char **env)
 {
-int i = 0;
-char *token, *copy_env;
-while (environ[i] != NULL)
-{
-copy_env = strdup(environ[i]);
-if (!copy_env)
-return (NULL);
-token = strtok(copy_env, "=");
-if (token && strcmp(token, name) == 0)
-{
-token = strtok(NULL, "=");
-free(copy_env);
-return (token ? strdup(token) : NULL);
+int i;
+for (i = 0; env[i]; i++)
+printf("%s\n", env[i]);
 }
-free(copy_env);
-i++; }
-return (NULL); }

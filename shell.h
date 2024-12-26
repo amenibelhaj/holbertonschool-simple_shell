@@ -20,6 +20,6 @@ void search_in_path(char **args, char **env, char *path);
 int main(int argc, char **argv, char **env);
 void exit_shell(void);
 char *_getenv(const char *name);
-
+void handle_env(char **env);
 
 #endif
