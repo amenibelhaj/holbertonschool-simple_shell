@@ -22,24 +22,27 @@ if (chdir(args[1]) != 0)
 perror("cd");
 }}}
 /**
- * handle_env - Prints the environment variables.
- * @env: The environment variables array.
+ * _getenv - Retrieves the value of an environment variable.
+ * @name: The name of the environment variable to find.
+ * Return: Pointer to the value of the environment variable,
+ * or NULL if not found.
  */
-void handle_env(char **env)
+char *_getenv(const char *name)
 {
 int i = 0;
-
-while (env[i] != NULL)
+char *token, *copy_env;
+while (environ[i] != NULL)
 {
-printf("%s\n", env[i]);
-i++;
-}}
-/**
- * handle_error - Prints an error message when a command is not found.
- * @cmd: The command that could not be found.
- * @prog_name: The name of the program (typically the shell's name).
- */
-void handle_error(const char *cmd, const char *prog_name)
+copy_env = strdup(environ[i]);
+if (!copy_env)
+return (NULL);
+token = strtok(copy_env, "=");
+if (token && strcmp(token, name) == 0)
 {
-fprintf(stderr, "%s: 1: %s: not found\n", prog_name, cmd);
+token = strtok(NULL, "=");
+free(copy_env);
+return (token ? strdup(token) : NULL);
 }
+free(copy_env);
+i++; }
+return (NULL); }

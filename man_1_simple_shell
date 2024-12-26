@@ -1,1 +1,50 @@
-manpage
+.TH SIMPLE_SHELL 1 "December 2024" "Shell Manual" "User Commands"
+.SH NAME
+simple_shell \- A simple command-line shell program
+.SH SYNOPSIS
+.B simple_shell
+[no arguments]
+.SH DESCRIPTION
+The \fBsimple_shell\fR is a basic command-line interpreter that executes user commands. It reads input, parses it into commands and arguments, and executes them. The shell supports built-in commands like \fBexit\fR and \fBcd\fR, and can search for commands in directories listed in the \fBPATH\fR environment variable.
+
+.SH FEATURES
+.TP
+- Executes commands by searching in the \fBPATH\fR environment variable.
+.TP
+- Supports built-in commands like \fBexit\fR, \fBcd\fR, and \fBenv\fR.
+.TP
+- Runs executables using absolute or relative paths.
+
+.SH BUILT-IN COMMANDS
+.TP
+.B exit
+Exit the shell program.
+.TP
+.B cd [directory]
+Change the current working directory. Defaults to \fB$HOME\fR if no directory is provided.
+.TP
+.B env
+Display the current environment variables.
+
+.SH USAGE
+Run \fBsimple_shell\fR and enter commands at the \fB($)\fR prompt. Examples:
+
+.EX
+($) echo "Hello, World!"
+Hello, World!
+($) cd /tmp
+($) env
+PATH=/usr/bin:/bin:/usr/local/bin
+HOME=/home/user
+($) exit
+.EE
+
+.SH FILES
+.B shell.h
+Header file containing function declarations and macros for \fBsimple_shell\fR.
+
+.SH AUTHOR
+Written for educational purposes.
+
+.SH SEE ALSO
+sh(1), bash(1), execve(2), fork(2), stat(2), wait(2)
