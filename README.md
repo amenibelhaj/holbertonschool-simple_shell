@@ -41,3 +41,7 @@ To compile and run the shell, follow these steps:
    ```bash
    git clone https://github.com/yourusername/simple-shell.git
    cd simple-shell
+
+
+
+![this is the logic of my programme ](image.png)
