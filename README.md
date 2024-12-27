@@ -45,3 +45,4 @@ To compile and run the shell, follow these steps:
 
 
 ![this is the logic of my programme ](image.png)
+![alt text](image-1.png)
